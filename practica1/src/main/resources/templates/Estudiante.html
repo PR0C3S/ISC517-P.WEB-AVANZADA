@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title th:text="${titulo}">Titulo por Defecto</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a href="#"
+       class="navbar-brand mb-0 h1">
+        <img class="d-inline-block align-top" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+             width="30" height="30" />
+        Grupo-10 App
+    </a>
+    <button
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            class="navbar-toggler"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto text-center" >
+            <li class="nav-item active">
+                <a href="/estudiante/" class="nav-link">Listar estudiantes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</div>
+
+</div>
+
+
+<div class="container text-center mt-5">
+    <div class="card bg-light mb-6">
+        <div class="card-header " th:text="${titulo}" ><h3>Crear-Editar Producto</h3></div>
+        <div class="card-body">
+            <div>
+
+                <form th:action="${action} == 'New' ? @{/estudiante/nuevo/save} : @{/estudiante/update/}+${estudiante.matricula}" th:method="post">
+
+                    <div th:if="${action} == 'New'">
+                        <label class="form-label">Matricula: </label>
+                        <input type="number" name="matricula"  value= "" min="1" max="999999999" id="matricula" th:value="${estudiante.matricula}">
+                        <br><br>
+                    </div>
+
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" id="nombre" name="nombre" required th:value="${estudiante.nombre}">
+                    <br><br>
+
+                    <label for="apellido">Apellido: </label>
+                    <input type="text" id="apellido" name="apellido" required th:value="${estudiante.apellido}">
+                    <br><br>
+
+                    <label for="telefono">Telefono: </label>
+                    <input type="text" id="telefono" name="telefono" required th:value="${estudiante.telefono}">
+                    <br><br>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+
+
+
+                <div th:if="${action} != 'New'">
+                    <form th:action="@{/estudiante/delete/} + ${estudiante.matricula}" th:method="post">
+                        <button type="submit" class="btn btn-danger">Eliminar Estudiante</button>
+                    </form>
+                </div>
+
+                <form action="/estudiante" method="get">
+                    <button type="submit" class="btn btn-secondary">Cancelar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</body>
+</html>
