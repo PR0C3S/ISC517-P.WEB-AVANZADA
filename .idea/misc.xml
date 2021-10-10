@@ -5,7 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/practica1" />
     <file type="web" url="file://$PROJECT_DIR$/practica2" />
   </component>
-  <component name="ProjectRootManager">
+  <component name="ProjectRootManager" version="2" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
