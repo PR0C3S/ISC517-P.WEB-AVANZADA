@@ -2,16 +2,14 @@ package com.pucmm.practica2.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Mock implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String description = "";
@@ -26,6 +24,24 @@ public class Mock implements Serializable {
     private String mockIdentifier = "";
     private int expiryTime;
     private int timeDelay;
+
+    protected Mock() {}
+
+    public Mock(String name, String description, String endPointPath, String accessMethod, String httpStatus, String responseContentType, String charset, String httpHeaders, String httpResponseBody, String secretToken, String mockIdentifier, int expiryTime, int timeDelay) {
+        this.name = name;
+        this.description = description;
+        this.endPointPath = endPointPath;
+        this.accessMethod = accessMethod;
+        this.httpStatus = httpStatus;
+        this.responseContentType = responseContentType;
+        this.charset = charset;
+        this.httpHeaders = httpHeaders;
+        this.httpResponseBody = httpResponseBody;
+        this.secretToken = secretToken;
+        this.mockIdentifier = mockIdentifier;
+        this.expiryTime = expiryTime;
+        this.timeDelay = timeDelay;
+    }
 
     public int getId() {
         return id;
