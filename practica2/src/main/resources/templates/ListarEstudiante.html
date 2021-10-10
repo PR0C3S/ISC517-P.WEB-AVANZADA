@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title th:text="${titulo}">Titulo por Defecto</title>
+</head>
+<body>
+<div th:replace="fragments/Header :: header"> </div>
+
+<div class="container text-center mt-5" >
+    <h1 th:text="${titulo}">Titulo Enviado</h1>
+    <div class="col-md-1">
+        <form method="get" action="/estudiante/nuevo">
+            <input type="submit" value="Crear Mock up" class="btn btn-primary" />
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div th:if="${listaEstudiante != null}">
+                    <tr th:each="actual: ${listaEstudiante}">
+                        <td th:text="${actual.matricula}"></td>
+                        <td th:text="${actual.nombre}"></td>
+                        <td th:text="${actual.apellido}"></td>
+                        <td th:text="${actual.telefono}"></td>
+                        <form  th:action="@{/estudiante/ver/} + ${actual.matricula}" th:method="get">
+                            <td> <input type="submit" value="Ver" class="btn btn-primary"/><td>
+                        </form>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>

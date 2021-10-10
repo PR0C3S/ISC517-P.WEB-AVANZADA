@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ISC517-P.-WEB-AVANZADA.iml" filepath="$PROJECT_DIR$/.idea/ISC517-P.-WEB-AVANZADA.iml" />
-      <module fileurl="file://$PROJECT_DIR$/practica1/practica1.iml" filepath="$PROJECT_DIR$/practica1/practica1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/practica2/practica2.iml" filepath="$PROJECT_DIR$/practica2/practica2.iml" />
     </modules>
   </component>
 </project>
