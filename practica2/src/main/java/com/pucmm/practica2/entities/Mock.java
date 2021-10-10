@@ -1,7 +1,5 @@
 package com.pucmm.practica2.entities;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,7 +8,7 @@ public class Mock implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String name;
     private String description = "";
     private String endPointPath = "";
@@ -43,11 +41,11 @@ public class Mock implements Serializable {
         this.timeDelay = timeDelay;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

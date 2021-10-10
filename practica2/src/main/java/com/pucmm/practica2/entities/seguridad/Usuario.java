@@ -1,5 +1,7 @@
 package com.pucmm.practica2.entities.seguridad;
 
+import com.pucmm.practica2.entities.Mock;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -16,6 +18,10 @@ public class Usuario implements Serializable {
     //Relacion con clase Rol.
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Rol> roles;
+
+    //Relacion con clase Mock.
+    @OneToMany
+    private Set<Mock> mocks;
 
     //Setters y Getters
     public String getUsername() {
@@ -44,5 +50,12 @@ public class Usuario implements Serializable {
     }
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
+    }
+
+    public Set<Mock> getMocks() {
+        return mocks;
+    }
+    public void setMocks(Set<Mock> mocks) {
+        this.mocks = mocks;
     }
 }
