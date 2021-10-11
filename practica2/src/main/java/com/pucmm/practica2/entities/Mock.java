@@ -2,6 +2,8 @@ package com.pucmm.practica2.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class Mock implements Serializable {
@@ -20,12 +22,14 @@ public class Mock implements Serializable {
     private String httpResponseBody = "";
     private String secretToken = "";
     private String mockIdentifier = "";
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp creationDate;
     private int expiryTime;
     private int timeDelay;
 
     protected Mock() {}
 
-    public Mock(String name, String description, String endPointPath, String accessMethod, String httpStatus, String responseContentType, String charset, String httpHeaders, String httpResponseBody, String secretToken, String mockIdentifier, int expiryTime, int timeDelay) {
+    public Mock(String name, String description, String endPointPath, String accessMethod, String httpStatus, String responseContentType, String charset, String httpHeaders, String httpResponseBody, String secretToken, String mockIdentifier, Timestamp creationDate, int expiryTime, int timeDelay) {
         this.name = name;
         this.description = description;
         this.endPointPath = endPointPath;
@@ -37,6 +41,7 @@ public class Mock implements Serializable {
         this.httpResponseBody = httpResponseBody;
         this.secretToken = secretToken;
         this.mockIdentifier = mockIdentifier;
+        this.creationDate = creationDate;
         this.expiryTime = expiryTime;
         this.timeDelay = timeDelay;
     }
@@ -135,6 +140,14 @@ public class Mock implements Serializable {
 
     public void setMockIdentifier(String mockIdentifier) {
         this.mockIdentifier = mockIdentifier;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 
     public int getExpiryTime() {
