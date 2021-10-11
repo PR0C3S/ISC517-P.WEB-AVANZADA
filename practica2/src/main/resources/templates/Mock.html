@@ -13,7 +13,7 @@
 <div class="container mt-2">
 
     <form th:action="@{/practica2/Mock/new/save}" th:method="post">
-        <label for="enlace2" class="form-label">Your URL:</label>
+        <label for="enlace2" class="form-label"  th:text="${nombre0}">nombre0</label>
         <div class="input-group mb-3">
 
             <span class="input-group-text" id="enlace1" th:text="${enlaceUser}"></span>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="input-group ">
-            <legend class="col-form-label col-sm-2 pt-0">Method: </legend>
+            <legend class="col-form-label col-sm-2 pt-0" th:text="${nombre1}"> nombre1</legend>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="GET" value="GET" checked>
                 <label class="form-check-label" for="GET" >GET</label>
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="Status">HTTP Status</label>
+                        <label class="input-group-text" for="Status" th:text="${nombre2}">nombre2</label>
                         <select class="form-select" required aria-label="select example" id="Status">
                             <option value="">Select the Status</option>
                             <!--        1xx informational response-->
@@ -129,7 +129,7 @@
                 </div>
                 <div class="col">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="Charset">Charset</label>
+                        <label class="input-group-text" for="Charset" th:text="${nombre3}">nombre3</label>
                         <select class="form-select" required aria-label="select example" id="Charset">
                             <option value="">Select the Charset</option>
                             <option value="UTF-8">UTF-8</option>
@@ -149,7 +149,7 @@
                 <div class="col">
                     <div class="input-group mb-3">
 
-                        <label class="input-group-text" for="ContentType">Response Content Type </label>
+                        <label class="input-group-text" for="ContentType" th:text="${nombre4}">nombre4 </label>
                         <select class="form-select" required aria-label="select example" id="ContentType">
                             <option value="">Select the Response Content Type</option>
                             <option value="application/json">application/json</option>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="col">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="Time">Time</label>
+                        <label class="input-group-text" for="Time" th:text="${nombre5}">nombre5</label>
                         <select class="form-select" aria-label="Default select example" id="Time">
                             <option selected value="never">Never Expire</option>
                             <option value="year">Expire in 1 year</option>
@@ -186,34 +186,30 @@
 
 
             <div class="mb-3">
-                <label for="HttpHeaders" class="form-label">HTTP Headers:</label>
+                <label for="HttpHeaders" class="form-label" th:text="${nombre6}">nombre6</label>
                 <span class="badge bg-secondary">Optional</span>
                 <textarea class="form-control" id="HttpHeaders" rows="3"></textarea>
             </div>
 
             <div class="mb-3">
-                <label for="HttpResponse" class="form-label">HTTP Response Body:</label>
+                <label for="HttpResponse" class="form-label" th:text="${nombre3}">nombre7</label>
                 <span class="badge bg-secondary">Optional</span>
                 <textarea class="form-control" id="HttpResponse" rows="6"></textarea>
             </div>
 
             <div class="row">
+
                 <div class="col">
-                    <label for="SecretToken" class="form-label">SecretToken</label>
-                    <span class="badge bg-secondary">Optional</span>
-                    <input type="text" class="form-control" id="SecretToken">
-                </div>
-                <div class="col">
-                    <label for="MockIdentifier" class="form-label">Mock identifier</label>
+                    <label for="MockIdentifier" class="form-label" th:text="${nombre8}">nombre8</label>
                     <span class="badge bg-secondary">Optional</span>
                     <input type="text" class="form-control" id="MockIdentifier">
                 </div>
             </div>
         <br><br>
-        <button   type="submit" class="btn btn-lg btn-primary btn-block mr-3" >GENERATE</button>
+        <button   type="submit" class="btn btn-lg btn-primary btn-block mr-3" th:text="${nombre9}">nombre9</button>
     </form>
     <form  th:action="@{/practica2/listarMock}" th:method="get">
-        <button   class="btn btn-lg btn-secondary btn-block  text-center" type="submit">CANCELL</button>
+        <button   class="btn btn-lg btn-secondary btn-block  text-center" type="submit" th:text="${nombre10}">nombre10</button>
     </form>
 
 
