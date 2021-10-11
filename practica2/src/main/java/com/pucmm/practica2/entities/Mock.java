@@ -1,11 +1,16 @@
 package com.pucmm.practica2.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+@Data
 @Entity
+@Table(name = "mock")
 public class Mock implements Serializable {
 
     @Id
@@ -23,7 +28,7 @@ public class Mock implements Serializable {
     private String secretToken = "";
     private String mockIdentifier = "";
     @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp creationDate;
+    private Date creationDate;
     private int expiryTime;
     private int timeDelay;
 
@@ -142,11 +147,11 @@ public class Mock implements Serializable {
         this.mockIdentifier = mockIdentifier;
     }
 
-    public Timestamp getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
