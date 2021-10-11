@@ -20,17 +20,17 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto text-center" >
         <li class="nav-item">
-          <a href="/practica2/listarMock/" class="nav-link">Listar Mock</a>
+          <a href="/practica2/listarMock" class="nav-link" th:text="${nav1}">nav1</a>
         </li>
 
         <div th:if="${login} != null">
           <li class="nav-item">
-            <a href="/practica2/logout/" class="nav-link">Log-out</a>
+            <a href="/practica2/logout" class="nav-link" th:text="${nav3}">nav3</a>
           </li>
         </div>
         <div th:if="${login} == null">
           <li class="nav-item">
-            <a href="/practica2/login/" class="nav-link">Log-in</a>
+            <a href="/practica2/login" class="nav-link" th:text="${nav2}">nav2</a>
           </li>
         </div>
 

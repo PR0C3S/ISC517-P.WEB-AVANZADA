@@ -17,18 +17,18 @@
     <h1 th:text="${titulo}">Titulo Enviado</h1>
     <div class="col-md-1">
         <form method="get" action="/practica2/mock/new">
-            <input type="submit" value="Create Mock up" class="btn btn-primary" />
+            <input type="submit"  th:value="${bt1}" class="btn btn-primary" />
         </form>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-primary">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Creation date</th>
-                    <th scope="col">Expiry Time in seconds </th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" th:text="${t1}" >t1</th>
+                    <th scope="col" th:text="${t2}">t2</th>
+                    <th scope="col" th:text="${t3}">t3</th>
+                    <th scope="col" th:text="${t4}">t4 </th>
+                    <th scope="col" th:text="${t5}">t5</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@
                     <tr th:each="actual: ${listaMock}">
                         <td th:text="${actual.name}"></td>
                         <td th:text="${actual.description}"></td>
-                        <td th:text="${actual.fechaCreacion }"></td>
+                        <td th:text="${actual.fechaCreacion}"></td>
                         <td th:text="${actual.expiryTime}"></td>
                         <td>
                             <form  th:action=" @{/practica2/mock/{user}/view/{link}(link = ${login}, user=${actual.endPointPath})}" th:method="get">
