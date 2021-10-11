@@ -15,7 +15,7 @@
             <h2 class="font-weight-normal ">Log-In</h2>
         </div>
         <div class="card-body">
-            <form method="post" action="/autenticar">
+            <form method="post" action="/practica2/autenticar">
                 <div th:if="${check} == 'true'">
                     <div class = "alert alert-warning" role="alert">
                         Usuario o Contraseña incorrecta
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="/registrarse" class="btn btn-outline-primary">No tienes cuenta? Regístrate</a>
+                    <a href="/practica2/registrarse" class="btn btn-outline-primary">No tienes cuenta? Regístrate</a>
                 </div>
 
                 <div class="mt-3 text-center">
