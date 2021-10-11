@@ -15,8 +15,13 @@
             <h2 class="font-weight-normal ">Log-In</h2>
         </div>
         <div class="card-body">
-            <form method="post" action="/practica2/autenticar">
-                <div th:if="${check} == 'true'">
+            <form method="post" action="/practica2/login">
+
+                <div th:if="${_csrf}!=null">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </div>
+
+                <div th:if="${error.isPresent()}">
                     <div class = "alert alert-warning" role="alert">
                         Usuario o Contraseña incorrecta
                     </div>
@@ -30,13 +35,8 @@
                     <input type="password" id="password" name="password" class="form-control" required placeholder="Contraseña">
                 </div>
 
-                <div class="text-center">
-                    <a href="/practica2/registrarse" class="btn btn-outline-primary">No tienes cuenta? Regístrate</a>
-                </div>
-
                 <div class="mt-3 text-center">
                     <button  type="submit" class="btn btn-lg btn-primary btn-block mr-3" >Ingresar</button>
-                    <button  class="btn btn-lg btn-secondary btn-block" onclick="location.href='/'">Cancelar</button>
                 </div>
             </form>
         </div>

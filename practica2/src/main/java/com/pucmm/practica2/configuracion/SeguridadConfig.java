@@ -13,13 +13,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SeguridadConfig extends WebSecurityConfigurerAdapter {
 
+    //Opción JPA
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        //Clase para encriptar contraseña
+        BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
+
+        //Configuración JPA.
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(bCryptPasswordEncoder);
@@ -39,8 +44,8 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() //cualquier llamada debe ser validada
                 .and()
                 .formLogin()
-                .loginPage("/login") //indicando la ruta que estaremos utilizando.
-                .failureUrl("/login?error") //en caso de fallar puedo indicar otra pagina.
+                .loginPage("/practica2/login") //indicando la ruta que estaremos utilizando.
+                .failureUrl("/practica2/login?error") //en caso de fallar puedo indicar otra pagina.
                 .permitAll()
                 .and()
                 .logout()

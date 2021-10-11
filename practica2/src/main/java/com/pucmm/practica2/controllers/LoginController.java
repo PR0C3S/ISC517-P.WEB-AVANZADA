@@ -11,8 +11,5 @@ import java.util.Optional;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView getLoginPage(@RequestParam Optional<String> error) {
-        return new ModelAndView("Autentificacion", "error", error);
-    }
+
 }

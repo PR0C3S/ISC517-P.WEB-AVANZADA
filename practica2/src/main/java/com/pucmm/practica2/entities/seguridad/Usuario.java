@@ -1,61 +1,33 @@
 package com.pucmm.practica2.entities.seguridad;
 
 import com.pucmm.practica2.entities.Mock;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 public class Usuario implements Serializable {
 
     //Atributos
     @Id
     private String username;
     private String password;
-    private boolean admin;
+    private String nombre;
+    private boolean admin = true;
 
     //Relacion con clase Rol.
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Rol> roles;
+    private Set<Rol> roles = new HashSet<Rol>();
 
     //Relacion con clase Mock.
     @OneToMany
-    private Set<Mock> mocks;
+    private Set<Mock> mocks = new HashSet<Mock>();
 
-    //Setters y Getters
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public Set<Rol> getRoles() {
-        return roles;
-    }
-    public void setRoles(Set<Rol> roles) {
-        this.roles = roles;
-    }
-
-    public Set<Mock> getMocks() {
-        return mocks;
-    }
-    public void setMocks(Set<Mock> mocks) {
-        this.mocks = mocks;
-    }
 }

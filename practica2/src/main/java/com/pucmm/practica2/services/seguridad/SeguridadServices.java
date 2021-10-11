@@ -40,7 +40,6 @@ public class SeguridadServices implements UserDetailsService {
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setAdmin(true);
         admin.setRoles(new HashSet<>(List.of(Admin)));
-        admin.setMocks(new HashSet<>(List.of()));
         usuarioRepository.save(admin);
     }
 
