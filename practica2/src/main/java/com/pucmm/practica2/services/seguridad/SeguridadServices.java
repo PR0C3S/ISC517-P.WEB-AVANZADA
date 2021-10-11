@@ -36,6 +36,7 @@ public class SeguridadServices implements UserDetailsService {
         rolRepository.save(Admin);
 
         Usuario admin = new Usuario();
+        admin.setNombre("admin");
         admin.setUsername("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setAdmin(true);
@@ -48,10 +49,12 @@ public class SeguridadServices implements UserDetailsService {
         Usuario user = usuarioRepository.findByUsername(username);
 
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
-        for (Rol rol : user.getRoles()) {
-            roles.add(new SimpleGrantedAuthority(rol.getRol()));
+        for (Rol role : user.getRoles()) {
+            roles.add(new SimpleGrantedAuthority(role.getRol()));
         }
+
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isAdmin(), true, true, true, grantedAuthorities);
     }
 }
