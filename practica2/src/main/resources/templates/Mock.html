@@ -16,7 +16,7 @@
         <label for="enlace2" class="form-label"  th:text="${nombre0}">nombre0</label>
         <div class="input-group mb-3">
 
-            <span class="input-group-text" id="enlace1" th:text="${enlaceUser}"></span>
+            <span class="input-group-text" id="enlace1" th:text="'http://localhost:8080/mock/' + ${login.username} + '/view/'"></span>
             <input type="text" class="form-control" id="enlace2" aria-describedby="basic-addon3" required>
         </div>
 

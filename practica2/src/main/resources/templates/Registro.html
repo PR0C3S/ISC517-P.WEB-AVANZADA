@@ -17,7 +17,7 @@
     <div class="card-body">
       <form method="post" action="/practica2/registrar/user">
 
-        <div th:if="${check} == 'true'">
+        <div th:if="${check}">
           <div class = "alert alert-warning" role="alert">
             El usuario ya se encuentra registrado, utiliza otro!
           </div>

@@ -35,22 +35,22 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
         //Marcando las reglas para permitir unicamente los usuarios
         http
                 .authorizeRequests()
-                .antMatchers("/","/css/**", "/js/**", "/actuator/**", "/webjars/**").permitAll() //permitiendo llamadas a esas urls.
-                .antMatchers("/dbconsole/**").permitAll()
-                .antMatchers("/thymeleaf/**", "/api/**", "/jpa/**").permitAll()
-                .antMatchers("/api-docs/**", "/api-docs.yaml", "/swagger-ui.html", "/swagger-ui/**").permitAll() //para OpenApi
-                .antMatchers("/admin/").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/mocks").permitAll() //hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated() //cualquier llamada debe ser validada
                 .and()
                 .formLogin()
                 .loginPage("/practica2/login") //indicando la ruta que estaremos utilizando.
+                .defaultSuccessUrl("/practica2/listarMock") //ruta por defecto a redireccion si no hay ninguna
                 .failureUrl("/practica2/login?error") //en caso de fallar puedo indicar otra pagina.
                 .permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/practica2/login")//cierre de sesion
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/practica2/errorpermiso");
 
+        //configuracion extra de h2
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

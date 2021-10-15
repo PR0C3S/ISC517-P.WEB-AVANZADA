@@ -16,8 +16,8 @@
 <div class="container text-center mt-5" >
     <h1 th:text="${titulo}">Titulo Enviado</h1>
     <div class="col-md-1">
-        <form method="get" action="/practica2/mock/new">
-            <input type="submit"  th:value="${bt1}" class="btn btn-primary" />
+        <form method="get" action="/practica2/registrar">
+            <input type="submit"  th:value="${bt2}" class="btn btn-primary" />
         </form>
     </div>
     <div class="table-responsive">
@@ -31,21 +31,35 @@
                 </tr>
             </thead>
             <tbody>
-                <div th:if="${listaMock != null}">
-                    <tr th:each="actual: ${listaMock}">
-                        <td th:text="${actual.usuario}"></td>
+                <div th:if="${listaUsuarios != null}">
+                    <tr th:each="actual: ${listaUsuarios}">
+                        <td th:text="${actual.username}"></td>
                         <td th:text="${actual.nombre}"></td>
-                        <td th:text="${actual.fechaCreacion}"></td>
-                        <td th:text="${actual.expiryTime}"></td>
-                        <td>
-                            <form  th:action=" @{/practica2/mock/{user}/view/{link}(link = ${login}, user=${actual.endPointPath})}" th:method="get">
-                                <input type="submit" value="Ver" class="btn btn-primary"/>
+                        <div th:if="!${actual.isAdmin()}">
+                            <form th:action="@{'/practica2/ascender/' + ${actual.username}}" th:method="post">
+                                <td><button class="btn btn-warning" type="submit">Ascender Rol</button></td>
                             </form>
+                            </td>
+                        </div>
 
-                            <form  th:action=" @{/practica2/mock/{user}/delete/{link}(link = ${login}, user=${actual.endPointPath})}" th:method="post">
-                                <input type="submit" value="Delete" class="btn btn-danger"/>
-                            </form>
-                        <td>
+                        <div th:if="${login.isAdmin()} and ${actual.username} != ${login.username}">
+                            <div th:if="${actual.isAdmin()}">
+                                <form th:action="@{'/practica2/descender/' + ${actual.username}}" th:method="post">
+                                <td><button class="btn btn-warning" type="submit">Descender Rol</button></td>
+                                </form>
+                            </div>
+                            <!-- FUNCIONES EXTRA DE ELIMINAR USUARIO NO PEDIDO EN LA ASIGNACION -->
+<!--                            <form th:action="@{'/practica2/eliminar/' + ${actual.username}}" th:method="post">-->
+<!--                                <td><button class="btn btn-danger" type="submit">Eliminar usuario</button></td>-->
+<!--                            </form>-->
+                        </div>
+<!--                        <div th:unless="${login.isAdmin()} and ${actual.username} != ${login.username}">-->
+<!--                            <div th:if="!${actual.isAdmin()}">-->
+<!--                                <form th:action="@{'/practica2/eliminar/' + ${actual.username}}" th:method="post">-->
+<!--                                    <td><button class="btn btn-danger" type="submit">Eliminar usuario</button></td>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </tr>
                 </div>
             </table>

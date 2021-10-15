@@ -20,7 +20,6 @@ public class Usuario implements Serializable {
     private String username;
     private String password;
     private String nombre;
-    private boolean admin = true;
 
     //Relacion con clase Rol.
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -29,5 +28,17 @@ public class Usuario implements Serializable {
     //Relacion con clase Mock.
     @OneToMany
     private Set<Mock> mocks = new HashSet<Mock>();
+
+    public Boolean isAdmin()
+    {
+        for (Rol act: roles) {
+            if(act.getRol().equals("ROLE_ADMIN"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

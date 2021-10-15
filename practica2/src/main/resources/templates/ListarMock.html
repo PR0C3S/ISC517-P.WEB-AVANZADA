@@ -32,18 +32,18 @@
                 </tr>
             </thead>
             <tbody>
-                <div th:if="${listaMock != null}">
-                    <tr th:each="actual: ${listaMock}">
+                <div th:if="${login.mocks != null}">
+                    <tr th:each="actual: ${login.mocks}">
                         <td th:text="${actual.name}"></td>
                         <td th:text="${actual.description}"></td>
                         <td th:text="${actual.fechaCreacion}"></td>
                         <td th:text="${actual.expiryTime}"></td>
                         <td>
-                            <form  th:action=" @{/practica2/mock/{user}/view/{link}(link = ${login}, user=${actual.endPointPath})}" th:method="get">
+                            <form  th:action=" @{/practica2/mock/{user}/view/{link}(link = ${login.username}, user=${actual.endPointPath})}" th:method="get">
                                 <input type="submit" value="Ver" class="btn btn-primary"/>
                             </form>
 
-                            <form  th:action=" @{/practica2/mock/{user}/delete/{link}(link = ${login}, user=${actual.endPointPath})}" th:method="post">
+                            <form  th:action=" @{/practica2/mock/{user}/delete/{link}(link = ${login.username}, user=${actual.endPointPath})}" th:method="post">
                                 <input type="submit" value="Delete" class="btn btn-danger"/>
                             </form>
                         <td>

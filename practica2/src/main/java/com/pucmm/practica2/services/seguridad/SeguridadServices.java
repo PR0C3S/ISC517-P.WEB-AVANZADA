@@ -33,14 +33,14 @@ public class SeguridadServices implements UserDetailsService {
 
     public void createAdminUser(){
         Rol Admin = new Rol("ROLE_ADMIN");
+        Rol User = new Rol("ROLE_USER");
         rolRepository.save(Admin);
 
         Usuario admin = new Usuario();
         admin.setNombre("admin");
         admin.setUsername("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
-        admin.setAdmin(true);
-        admin.setRoles(new HashSet<>(List.of(Admin)));
+        admin.setRoles(new HashSet<>(List.of(Admin,User)));
         usuarioRepository.save(admin);
     }
 
@@ -55,6 +55,8 @@ public class SeguridadServices implements UserDetailsService {
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isAdmin(), true, true, true, grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities);
     }
+
+
 }
