@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -35,8 +36,7 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
         //Marcando las reglas para permitir unicamente los usuarios
         http
                 .authorizeRequests()
-                .antMatchers("/mocks").permitAll() //hasAnyRole("ADMIN", "USER")
-                .anyRequest().authenticated() //cualquier llamada debe ser validada
+                .antMatchers("/practica2/**").authenticated()//hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
                 .loginPage("/practica2/login") //indicando la ruta que estaremos utilizando.
@@ -48,11 +48,19 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/practica2/errorpermiso");
+                .accessDeniedPage("/practica2/errorpermiso")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/practica2/p/**").permitAll()
+                .and().addFilterBefore(new JWTAutorizacionFilter(), BasicAuthenticationFilter.class);
+//
 
-        //configuracion extra de h2
+
+        //permitiendo el acceso vía cors, crfs y los iframe.
+        http.cors().disable();
         http.csrf().disable();
         http.headers().frameOptions().disable();
-    }
+
+   }
 
 }
