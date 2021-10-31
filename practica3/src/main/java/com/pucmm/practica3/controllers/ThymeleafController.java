@@ -1,40 +1,33 @@
-package com.pucmm.practica2.controllers;
+package com.pucmm.practica3.controllers;
 
-
-import com.google.gson.Gson;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.pucmm.practica2.entities.Mock;
-import com.pucmm.practica2.entities.Proyecto;
-import com.pucmm.practica2.entities.seguridad.Rol;
-import com.pucmm.practica2.entities.seguridad.Usuario;
-import com.pucmm.practica2.repositorios.MockRepository;
-import com.pucmm.practica2.repositorios.ProyectoRepository;
-import com.pucmm.practica2.repositorios.seguridad.RolRepository;
-import com.pucmm.practica2.repositorios.seguridad.UsuarioRepository;
+import com.pucmm.practica3.entities.Mock;
+import com.pucmm.practica3.entities.Proyecto;
+import com.pucmm.practica3.entities.seguridad.Rol;
+import com.pucmm.practica3.entities.seguridad.Usuario;
+import com.pucmm.practica3.repositorios.MockRepository;
+import com.pucmm.practica3.repositorios.ProyectoRepository;
+import com.pucmm.practica3.repositorios.seguridad.RolRepository;
+import com.pucmm.practica3.repositorios.seguridad.UsuarioRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
-import io.micrometer.core.instrument.config.validate.ValidationException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.Map;
-
-
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping(path="/practica2")
+@RequestMapping(path="/practica3")
 public class ThymeleafController {
 
 
@@ -81,7 +74,7 @@ public class ThymeleafController {
     @PostMapping("/eliminar/{username}")
     public String postEliminarUsuario(@PathVariable("username") String username) {
         usuarioRepository.deleteById(username);
-        return "redirect:/practica2/listarUsuarios";
+        return "redirect:/practica3/listarUsuarios";
     }
 
     @Secured({"ROLE_ADMIN"})
@@ -149,7 +142,7 @@ public class ThymeleafController {
         if(usuarioRepository.findByUsername(usuario.toLowerCase()) !=null)
         {
             attr.addAttribute ("check", true); //se manda para que active que el usuario esta en uso
-            return "redirect:/practica2/registrar";
+            return "redirect:/practica3/registrar";
         }
 
         Usuario tmp = new Usuario();
@@ -162,7 +155,7 @@ public class ThymeleafController {
         act.setUsuario(tmp);
         tmp.setProyecto(act);
         usuarioRepository.save(tmp);
-        return "redirect:/practica2/listarUsuarios";
+        return "redirect:/practica3/listarUsuarios";
     }
 
     @Secured({"ROLE_ADMIN"})
@@ -173,7 +166,7 @@ public class ThymeleafController {
         act.setRoles(new HashSet<>(List.of(rolAdmin,rolUser)));
         usuarioRepository.save(act);
 
-        return "redirect:/practica2/listarUsuarios";
+        return "redirect:/practica3/listarUsuarios";
     }
 
     @Secured({"ROLE_ADMIN"})
@@ -183,7 +176,7 @@ public class ThymeleafController {
         act.setRoles(new HashSet<>(List.of(rolUser)));
         usuarioRepository.save(act);
 
-        return "redirect:/practica2/listarUsuarios";
+        return "redirect:/practica3/listarUsuarios";
     }
 
     @GetMapping(path ="/listarMock")
@@ -295,13 +288,13 @@ public class ThymeleafController {
         crear.setAccessMethod(method);
 
         mockRepository.save(crear);
-        return "redirect:/practica2/listarMock";
+        return "redirect:/practica3/listarMock";
     }
 
     @PostMapping("/eliminar/mock/{id}")
     public String postEliminarMock(@PathVariable("id") long id) {
         mockRepository.deleteById(id);
-        return "redirect:/practica2/listarMock";
+        return "redirect:/practica3/listarMock";
     }
 
     @RequestMapping(path ="/mock/view/{username}/{link}", method = RequestMethod.GET)
@@ -464,7 +457,7 @@ public class ThymeleafController {
         System.out.println("TOKEN CREADO CORRECTAMENTE");
         System.out.println("TOKEN: "+token);
         response.setHeader("Authorization", token);
-        RequestDispatcher view = request.getRequestDispatcher("/practica2/mock/view/"+mock.getProyecto().getUsuario().getUsername()+"/"+mock.getEndPoint());
+        RequestDispatcher view = request.getRequestDispatcher("/practica3/mock/view/"+mock.getProyecto().getUsuario().getUsername()+"/"+mock.getEndPoint());
         view.forward(request, response);
     }
 

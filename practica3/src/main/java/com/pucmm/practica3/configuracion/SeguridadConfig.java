@@ -1,4 +1,4 @@
-package com.pucmm.practica2.configuracion;
+package com.pucmm.practica3.configuracion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

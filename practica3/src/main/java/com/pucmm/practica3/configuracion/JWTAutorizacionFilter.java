@@ -1,4 +1,4 @@
-package com.pucmm.practica2.configuracion;
+package com.pucmm.practica3.configuracion;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

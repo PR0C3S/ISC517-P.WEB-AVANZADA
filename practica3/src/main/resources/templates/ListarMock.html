@@ -16,7 +16,7 @@
 <div class="container text-center mt-5" >
     <h1 th:text="${titulo}">Titulo Enviado</h1>
     <div class="col-md-1">
-        <form method="get" action="/practica2/mock/new">
+        <form method="get" action="/practica3/mock/new">
             <input type="submit"  th:value="${bt1}" class="btn btn-primary" />
         </form>
     </div>
@@ -48,10 +48,10 @@
                         <td th:text="${actual.fechaVencimiento()}"></td>
                         <td th:text="${actual.timeDelay}"></td>
                         <td>
-                            <form  th:action=" @{/practica2/auth/{id}(id = ${actual.id})}" th:method="post">
+                            <form  th:action=" @{/practica3/auth/{id}(id = ${actual.id})}" th:method="post">
                                 <input type="submit" value="Ver" class="btn btn-primary"/>
                             </form>
-                            <form  th:action=" @{/practica2/eliminar/mock/{id}(id = ${actual.id})}" th:method="post">
+                            <form  th:action=" @{/practica3/eliminar/mock/{id}(id = ${actual.id})}" th:method="post">
                                 <input type="submit" value="Delete" class="btn btn-danger"/>
                             </form>
                         </td>

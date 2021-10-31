@@ -1,0 +1,47 @@
+package com.pucmm.practica3.entities.seguridad;
+
+import com.pucmm.practica3.entities.Proyecto;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.*;
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
+
+public class Usuario implements Serializable {
+
+    //Atributos
+    @Id
+    private String username;
+    private String password;
+    private String nombre;
+    private Boolean isActivo= true;
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private Proyecto proyecto;
+
+    //Relacion con clase Rol.
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Rol> roles = new HashSet<Rol>();
+
+    public Boolean isAdmin()
+    {
+        for (Rol act: roles) {
+            if(act.getRol().equals("ROLE_ADMIN"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+}

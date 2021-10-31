@@ -1,23 +1,18 @@
-package com.pucmm.practica2.entities;
+package com.pucmm.practica3.entities;
 
-import com.pucmm.practica2.entities.seguridad.Usuario;
-import lombok.*;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
-
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor

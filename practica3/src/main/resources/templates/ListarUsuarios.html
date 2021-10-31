@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title th:text="${titulo}">Titulo por Defecto</title>
+</head>
+<body>
+<div th:replace="fragments/Header :: header"> </div>
+
+<div class="container text-center mt-5" >
+    <h1 th:text="${titulo}">Titulo Enviado</h1>
+    <div class="col-md-1">
+        <form method="get" action="/practica3/registrar">
+            <input type="submit"  th:value="${bt2}" class="btn btn-primary" />
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col" >Usuario</th>
+                    <th scope="col" >Nombre</th>
+                    <th scope="col" >Modificar Credenciales</th>
+<!--                    <th scope="col" >Eliminacion Usuarios</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <div th:if="${listaUsuarios != null}">
+                    <tr th:each="actual: ${listaUsuarios}">
+                        <td th:text="${actual.username}"></td>
+                        <td th:text="${actual.nombre}"></td>
+                        <div th:if="!${actual.isAdmin()}">
+                            <form th:action="@{'/practica3/ascender/' + ${actual.username}}" th:method="post">
+                                <td><button class="btn btn-warning" type="submit">Ascender Rol</button></td>
+                            </form>
+                            </td>
+                        </div>
+
+                        <div th:if="${login.isAdmin()} and ${actual.username} != ${login.username} and ${actual.username} != 'admin'">
+                            <div th:if="${actual.isAdmin()}">
+                                <form th:action="@{'/practica3/descender/' + ${actual.username}}" th:method="post">
+                                <td><button class="btn btn-warning" type="submit">Descender Rol</button></td>
+                                </form>
+                            </div>
+                            <!-- FUNCIONES EXTRA DE ELIMINAR USUARIO NO PEDIDO EN LA ASIGNACION -->
+<!--                            <form th:action="@{'/practica3/eliminar/' + ${actual.username}}" th:method="post">-->
+<!--                                <td><button class="btn btn-danger" type="submit">Eliminar usuario</button></td>-->
+<!--                            </form>-->
+                        </div>
+                        <!-- FUNCIONES EXTRA DE ELIMINAR USUARIO NO PEDIDO EN LA ASIGNACION -->
+<!--                        <div th:unless="${login.isAdmin()} and ${actual.username} != ${login.username}">-->
+<!--                            <div th:if="!${actual.isAdmin()}">-->
+<!--                                <form th:action="@{'/practica3/eliminar/' + ${actual.username}}" th:method="post">-->
+<!--                                    <td><button class="btn btn-danger" type="submit">Eliminar usuario</button></td>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
