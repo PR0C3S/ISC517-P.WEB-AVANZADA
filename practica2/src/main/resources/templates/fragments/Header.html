@@ -23,16 +23,16 @@
           <a href="/practica2/listarMock" class="nav-link" th:text="${nav1}">nav1</a>
         </li>
 
-        <div th:if="${login} != null">
-          <li class="nav-item">
+          <li class="nav-item" th:if="${admin}">
+            <a href="/practica2/listarUsuarios" class="nav-link" th:text="${nav0}">nav0</a>
+          </li>
+          <li class="nav-item" th:if="${login} != null">
             <a href="/logout" class="nav-link" th:text="${nav3}">nav3</a>
           </li>
-        </div>
-        <div th:if="${login} == null">
-          <li class="nav-item">
+          <li class="nav-item"th:if="${login} == null">
             <a href="/practica2/login" class="nav-link" th:text="${nav2}">nav2</a>
           </li>
-        </div>
+
 
       </ul>
     </div>

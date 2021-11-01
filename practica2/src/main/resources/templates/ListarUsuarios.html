@@ -42,7 +42,7 @@
                             </td>
                         </div>
 
-                        <div th:if="${login.isAdmin()} and ${actual.username} != ${login.username}">
+                        <div th:if="${login.isAdmin()} and ${actual.username} != ${login.username} and ${actual.username} != 'admin'">
                             <div th:if="${actual.isAdmin()}">
                                 <form th:action="@{'/practica2/descender/' + ${actual.username}}" th:method="post">
                                 <td><button class="btn btn-warning" type="submit">Descender Rol</button></td>
@@ -53,6 +53,7 @@
 <!--                                <td><button class="btn btn-danger" type="submit">Eliminar usuario</button></td>-->
 <!--                            </form>-->
                         </div>
+                        <!-- FUNCIONES EXTRA DE ELIMINAR USUARIO NO PEDIDO EN LA ASIGNACION -->
 <!--                        <div th:unless="${login.isAdmin()} and ${actual.username} != ${login.username}">-->
 <!--                            <div th:if="!${actual.isAdmin()}">-->
 <!--                                <form th:action="@{'/practica2/eliminar/' + ${actual.username}}" th:method="post">-->

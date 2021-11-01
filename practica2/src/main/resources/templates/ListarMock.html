@@ -24,6 +24,8 @@
         <table class="table table-bordered table-hover">
             <thead class="table-primary">
                 <tr>
+                    <th scope="col" th:if="${admin}" th:text="${t0}"></th>
+                    <th scope="col" th:text="${t6}" >t6</th>
                     <th scope="col" th:text="${t1}" >t1</th>
                     <th scope="col" th:text="${t2}">t2</th>
                     <th scope="col" th:text="${t3}">t3</th>
@@ -32,21 +34,27 @@
                 </tr>
             </thead>
             <tbody>
-                <div th:if="${login.mocks != null}">
-                    <tr th:each="actual: ${login.mocks}">
+                <div th:if="${listaMock != null}">
+                    <tr th:each="actual: ${listaMock}">
+                        <td th:if="${admin}" th:text="${actual.proyecto.usuario.username}" ></td>
+                        <td th:text="${actual.URL}"></td>
                         <td th:text="${actual.name}"></td>
-                        <td th:text="${actual.description}"></td>
-                        <td th:text="${actual.fechaCreacion}"></td>
-                        <td th:text="${actual.expiryTime}"></td>
                         <td>
-                            <form  th:action=" @{/practica2/mock/{user}/view/{link}(link = ${login.username}, user=${actual.endPointPath})}" th:method="get">
+                            <span class="badge bg-primary text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span class="badge bg-info text-dark" th:text="${actual.httpStatus}">Optional</span>
+                            <span class="badge bg-warning text-dark" th:text="${actual.responseContentType}">Optional</span>
+                        </td>
+
+                        <td th:text="${actual.fechaVencimiento()}"></td>
+                        <td th:text="${actual.timeDelay}"></td>
+                        <td>
+                            <form  th:action=" @{/practica2/auth/{id}(id = ${actual.id})}" th:method="post">
                                 <input type="submit" value="Ver" class="btn btn-primary"/>
                             </form>
-
-                            <form  th:action=" @{/practica2/mock/{user}/delete/{link}(link = ${login.username}, user=${actual.endPointPath})}" th:method="post">
+                            <form  th:action=" @{/practica2/eliminar/mock/{id}(id = ${actual.id})}" th:method="post">
                                 <input type="submit" value="Delete" class="btn btn-danger"/>
                             </form>
-                        <td>
+                        </td>
                     </tr>
                 </div>
             </table>

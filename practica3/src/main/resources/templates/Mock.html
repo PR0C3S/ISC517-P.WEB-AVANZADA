@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">Titulo Enviado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+</head>
+<body>
+<div th:replace="fragments/Header :: header"> </div>
+
+
+<div class="container mt-2">
+
+    <form th:action="@{/practica3/mock/new/save}" th:method="post">
+        <label for="enlace2" class="form-label"  th:text="${nombre0}">nombre0</label>
+        <div class="input-group mb-3">
+
+            <span class="input-group-text" id="enlace1" th:text="'http://localhost:8080/mock/view/' + ${login.username} + '/'"></span>
+            <input type="text" class="form-control" name="enlace2" id="enlace2" aria-describedby="basic-addon3" required>
+        </div>
+
+        <div class="input-group ">
+            <legend class="col-form-label col-sm-2 pt-0" th:text="${nombre1}"> nombre1</legend>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="method" id="GET" value="GET" checked>
+                <label class="form-check-label" for="GET" >GET</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="method" id="POST" value="POST">
+                <label class="form-check-label" for="POST">POST</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="method" id="PUT" value="PUT">
+                <label class="form-check-label" for="PUT">PUT</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="method" id="PATCH" value="PATCH">
+                <label class="form-check-label" for="PATCH">PATCH</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="method" id="DELETE" value="DELETE">
+                <label class="form-check-label" for="DELETE">DELETE</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="method" id="OPTIONS" value="OPTIONS">
+                <label class="form-check-label" for="OPTIONS">OPTIONS</label>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="Status" th:text="${nombre2}">nombre2</label>
+                        <select class="form-select" required aria-label="select example" id="Status" name="Status">
+                            <option value="">Select the Status</option>
+                            <!--        1xx informational response-->
+                            <option value="CONTINUE">100 - Continue</option>
+                            <option value="SWITCHING_PROTOCOLS">101 - Switching Protocols</option>
+                            <option value="PROCESSING">102 - Processing</option>
+                            <!--        2xxsucces-->
+                            <option value="OK">200 - OK</option>
+                            <option value="CREATED">201 - Created</option>
+                            <option value="ACCEPTED">202 - Accepted</option>
+                            <option value="NON_AUTHORITATIVE_INFORMATION">203 - Non-Authoritative Information</option>
+                            <option value="NO_CONTENT">204 - No Content</option>
+                            <option value="RESET_CONTENT">205 - Reset Content</option>
+                            <option value="PARTIAL_CONTENT">206 - Partial Content</option>
+                            <option value="MULTI_STATUS">207 - Multi-Status</option>
+                            <option value="ALREADY_REPORTED">208 - Already Reported</option>
+                            <option value="IM_USED">226 - Im Used</option>
+                            <!--        3xxRedirection-->
+                            <option value="MULTIPLE_CHOICES">300 - Multiple Choices</option>
+                            <option value="MOVED_PERMANENTLY">301 - Moved Permanently</option>
+                            <option value="FOUND">302 - Found</option>
+                            <option value="SEE_OTHER">303 - See other</option>
+                            <option value="NOT_MODIFIED">304 - Not Modified</option>
+                            <option value="TEMPORARY_REDIRECT">307 - Temporary Redirect</option>
+                            <option value="PERMANENT_REDIRECT">308 - Permanent Redirect</option>
+                            <!--        4xxRedirection-->
+                            <option value="BAD_REQUEST">400 - Bad Request</option>
+                            <option value="UNAUTHORIZED">401 - Unauthorized</option>
+                            <option value="PAYMENT_REQUIRED">402 - Payment Required</option>
+                            <option value="FORBIDDEN">403 - Forbidden</option>
+                            <option value="NOT_FOUND">404 - Not Found</option>
+                            <option value="METHOD_NOT_ALLOWED">405 - Method Not Allowed</option>
+                            <option value="NOT_ACCEPTABLE">406 - Not Acceptable</option>
+                            <option value="PROXY_AUTHENTICATION_REQUIRED">407 - Proxy Authentication Required</option>
+                            <option value="REQUEST_TIMEOUT">408 - Request Timeout</option>
+                            <option value="CONFLICT">409 - Conflict</option>
+                            <option value="GONE">410 - Gone</option>
+                            <option value="LENGTH_REQUIRED">411 - Length Required</option>
+                            <option value="PRECONDITION_FAILED">413 - Precondition Failed</option>
+                            <option value="URI_TOO_LONG">414 - Request-URL Too Long</option>
+                            <option value="UNSUPPORTED_MEDIA_TYPE">415 - Unsopported Media Type</option>
+                            <option value="REQUESTED_RANGE_NOT_SATISFIABLE">416 - Requested Range Not Satisfiable</option>
+                            <option value="EXPECTATION_FAILED">417 - Expectation Failed</option>
+                            <option value="I_AM_A_TEAPOT">418 - Im a teapot</option>
+                            <option value="UNPROCESSABLE_ENTITY">422 - Unprocessable Entity</option>
+                            <option value="LOCKED">423 - Locked</option>
+                            <option value="FAILED_DEPENDENCY">424 - Failed Dependency</option>
+                            <option value="UPGRADE_REQUIRED">426 - Upgrade Required</option>
+                            <option value="PRECONDITION_REQUIRED">428 - Precondition Required</option>
+                            <option value="TOO_MANY_REQUESTS">429 - Too Many Requets</option>
+                            <option value="REQUEST_HEADER_FIELDS_TOO_LARGE">431 - Requets Headers Fields Too Large</option>
+                            <!--        5xx Server error-->
+                            <option value="INTERNAL_SERVER_ERROR">500 - Internal Server Error</option>
+                            <option value="NOT_IMPLEMENTED">501 - Not Implemented</option>
+                            <option value="BAD_GATEWAY">502 - Bad Gateway</option>
+                            <option value="SERVICE_UNAVAILABLE">503 - Service Unavailable</option>
+                            <option value="GATEWAY_TIMEOUT">504 - Gateway Timeout</option>
+                            <option value="HTTP_VERSION_NOT_SUPPORTED">505 - HTTP Version Not Supported</option>
+                            <option value="VARIANT_ALSO_NEGOTIATES">506 - Variant Also Negotiates</option>
+                            <option value="INSUFFICIENT_STORAGE">507 - Insufficient Storage</option>
+                            <option value="BANDWIDTH_LIMIT_EXCEEDED">509 - Bandwidth Limit Exceeded</option>
+                            <option value="NOT_EXTENDED">510 - Not Extended</option>
+
+                        </select>
+                        <div class="invalid-feedback">HTTP Status not select</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="Charset" th:text="${nombre3}">nombre3</label>
+                        <select class="form-select" required aria-label="select example" id="Charset" name="Charset">
+                            <option value="">Select the Charset</option>
+                            <option value="utf-8">UTF-8</option>
+                            <option value="iso-8859-1">ISO-8859-1</option>
+                            <option value="utf-16">UTF-16</option>
+
+                        </select>
+                        <div class="invalid-feedback">Charset not select</div>
+                    </div>
+                </div>
+            </div>
+        <div class="input-group mb-3">
+
+        </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+
+                        <label class="input-group-text" for="ContentType" th:text="${nombre4}">nombre4 </label>
+                        <select class="form-select" required aria-label="select example" name="ContentType" id="ContentType">
+                            <option value="">Select the Response Content Type</option>
+                            <option value="application/json">application/json</option>
+                            <option value="application/xhtml+xml">application/xhtml+xml</option>
+                            <option value="application/xml">application/xml</option>
+                            <option value="multipart/form-data">multipart/form-data</option>
+                            <option value="text/html">text/html</option>
+                            <option value="multipart/form-data">text/plain</option>
+                            <option value="text/xml">text/xml</option>
+
+                        </select>
+
+                        <div class="invalid-feedback">Response Content Type not select</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="ExpiryTime" th:text="${nombre5}">nombre5</label>
+                        <select class="form-select" aria-label="Default select example" id="ExpiryTime" name="ExpiryTime">
+                            <option selected value="never">Never Expire</option>
+                            <option value="year">Expire in 1 year</option>
+                            <option value="month">Expire in 1 Month</option>
+                            <option value="week">Expire in 1 Week</option>
+                            <option value="day">Expire in 1 Day</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="mb-3">
+                <label for="HttpHeaders" class="form-label" th:text="${nombre6}">nombre6</label>
+                <span class="badge bg-secondary">Optional</span>
+                <textarea class="form-control" id="HttpHeaders" name="HttpHeaders" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="HttpResponse" class="form-label" th:text="${nombre3}">nombre7</label>
+                <span class="badge bg-secondary">Optional</span>
+                <textarea class="form-control" id="HttpResponse"  name="HttpResponse" rows="6"></textarea>
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+                    <label for="MockIdentifier" class="form-label" th:text="${nombre8}">nombre8</label>
+                    <span class="badge bg-secondary">Optional</span>
+                    <input type="text" class="form-control" id="MockIdentifier" name="MockIdentifier">
+                </div>
+                <div class="col">
+                    <label for="TimeDelay" class="form-label" th:text="${nombre11}">nombre11</label>
+                    <span class="badge bg-secondary">Optional</span>
+                    <input type="number" class="form-control" id="TimeDelay" name="TimeDelay" min="0" value="0">
+                </div>
+            </div>
+
+
+        <button   type="submit" class="btn btn-lg btn-primary btn-block mr-3" th:text="${nombre9}">nombre9</button>
+    </form>
+    <form  th:action="@{/practica3/listarMock}" th:method="get">
+        <button   class="btn btn-lg btn-secondary btn-block  text-center" type="submit" th:text="${nombre10}">nombre10</button>
+    </form>
+
+
+
+
+</div>
+</body>
+</html>
