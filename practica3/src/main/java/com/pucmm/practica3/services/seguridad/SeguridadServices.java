@@ -38,26 +38,30 @@ public class SeguridadServices implements UserDetailsService {
     }
 
     public void createAdminUser(){
-        Rol Admin = new Rol("ROLE_ADMIN");
-        Rol User = new Rol("ROLE_USER");
-        rolRepository.save(Admin);
 
+        if(usuarioRepository.findByUsername("admin") == null)
+        {
+            System.out.println("USUARIO ADMIN CREADO");
+            Rol Admin = new Rol("ROLE_ADMIN");
+            Rol User = new Rol("ROLE_USER");
+            rolRepository.save(Admin);
+            Usuario admin = new Usuario();
+            admin.setNombre("admin");
+            admin.setUsername("admin");
+            admin.setPassword(bCryptPasswordEncoder.encode("admin"));
+            admin.setRoles(new HashSet<>(List.of(Admin,User)));
 
+            Proyecto proyecto = new Proyecto();
+            proyecto.setUsuario(admin);
 
-        Usuario admin = new Usuario();
-        admin.setNombre("admin");
-        admin.setUsername("admin");
-        admin.setPassword(bCryptPasswordEncoder.encode("admin"));
-        admin.setRoles(new HashSet<>(List.of(Admin,User)));
+            admin.setProyecto(proyecto);
+            usuarioRepository.save(admin);
 
-        Proyecto proyecto = new Proyecto();
-        proyecto.setUsuario(admin);
-
-        admin.setProyecto(proyecto);
-        usuarioRepository.save(admin);
-
-        //
-        //proyectoRepository.save(proyecto);
+            //
+            //proyectoRepository.save(proyecto);
+            return;
+        }
+        System.out.println("YA EXISTIA USUARIO ADMIN");
     }
 
     @Override

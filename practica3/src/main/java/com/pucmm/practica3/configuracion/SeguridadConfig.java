@@ -36,19 +36,19 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
         //Marcando las reglas para permitir unicamente los usuarios
         http
                 .authorizeRequests()
-                .antMatchers("/practica2/**").authenticated()//hasAnyRole("ADMIN", "USER")
+                .antMatchers("/practica3/**").authenticated()//hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
-                .loginPage("/practica2/login") //indicando la ruta que estaremos utilizando.
-                .defaultSuccessUrl("/practica2/listarMock") //ruta por defecto a redireccion si no hay ninguna
-                .failureUrl("/practica2/login?error") //en caso de fallar puedo indicar otra pagina.
+                .loginPage("/practica3/login") //indicando la ruta que estaremos utilizando.
+                .defaultSuccessUrl("/practica3/listarMock") //ruta por defecto a redireccion si no hay ninguna
+                .failureUrl("/practica3/login?error") //en caso de fallar puedo indicar otra pagina.
                 .permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/practica2/login")//cierre de sesion
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/practica3/login")//cierre de sesion
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/practica2/mock/view/*").permitAll()
+                .antMatchers("/practica3/mock/view/*").permitAll()
                 .and().addFilterBefore(new JWTAutorizacionFilter(), BasicAuthenticationFilter.class);
 //
 

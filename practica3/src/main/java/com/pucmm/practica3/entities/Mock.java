@@ -62,7 +62,7 @@ public class Mock implements Serializable {
         return date;
     }
     public void SETURL(String user) throws URISyntaxException {
-        URL = new URI("http://localhost:8080/practica2/mock/view/"+user+"/"+endPoint);
+        URL = new URI("http://localhost:8080/practica3/mock/view/"+user+"/"+endPoint);
     }
 
 

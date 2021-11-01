@@ -3,7 +3,7 @@ version: '3.8'
 #Bloque de servicios, indica los contenedores a utilizar.
 services:
   app-web:       #nombre del servicio
-    #image: vacax/micro-servicio-estudiante #imagen utilizada si viene del registro.
+    #image: ${DK_USR}/practica3 #imagen utilizada si viene del registro.
     build: .
     ports:          #puertos que estaran expuestos.
       - ${PUERTO_APP}:8080
