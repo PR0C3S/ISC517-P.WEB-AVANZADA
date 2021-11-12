@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.pucmm'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.6'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'org.springframework.boot:spring-boot-starter-activemq'
+    implementation 'org.apache.activemq:activemq-broker'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'org.apache.activemq:activemq-kahadb-store'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.json:json:20171018'
+
+    //Base de datos
+    runtimeOnly 'mysql:mysql-connector-java'
+}
+
+test {
+    useJUnitPlatform()
+}

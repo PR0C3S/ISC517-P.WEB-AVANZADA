@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grupo10-Consumidor</title>
+</head>
+<body>
+<!-- Page Content -->
+<nav id="navbar-example2" class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="#">
+        <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        Grupo10-Practica4
+    </a>
+    </div>
+    <ul class="nav nav-pills">
+        <li class="nav-item bg-dark">
+            <a class="nav-link bg-dark text-white" href="#grafico1">Dispositivo 1 - Humedad vs Tiempo</a>
+        </li>
+        <li class="nav-item bg-dark">
+            <a class="nav-link bg-dark text-white" href="#grafico2">Dispositivo 1 - Temperatura vs Tiempo</a>
+        </li>
+        <li class="nav-item bg-dark">
+            <a class="nav-link bg-dark text-white" href="#grafico3">Dispositivo 2 - Humedad vs Tiempo</a>
+        </li>
+        <li class="nav-item bg-dark">
+            <a class="nav-link bg-dark text-white" href="#grafico4">Dispositivo 2 - Temperatura vs Tiempo</a>
+        </li>
+    </ul>
+</nav>
+<div >
+    <div class="card">
+        <h5 class="card-header text-white bg-primary text-center">Dispositivo 1 - Humedad vs Tiempo</h5>
+        <div class="card-body">
+            <canvas class="ml-auto" id="grafico1" style="width: 90%; height: 500px; " ></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header text-white bg-primary text-center">Dispositivo 1 - Temperatura vs Tiempo</h5>
+        <div class="card-body" >
+            <canvas class="ml-auto" id="grafico2" style="width: 90%; height: 500px; " ></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header text-white bg-primary text-center">Dispositivo 2 - Humedad vs Tiempo</h5>
+        <div class="card-body">
+            <canvas class="ml-auto" id="grafico3" style="width: 90%; height: 500px; " ></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header text-white bg-primary text-center">Dispositivo 2 - Temperatura vs Tiempo</h5>
+        <div class="card-body">
+            <canvas class="ml-auto" id="grafico4" style="width: 90%; height: 500px; " ></canvas>
+        </div>
+    </div>
+</div>
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" >
+        var humedad1 = new Array();
+        var temperatura1 = new Array();
+        var fecha1 = new Array();
+        var humedad2 = new Array();
+        var temperatura2 = new Array();
+        var fecha2 = new Array();
+        let grafico1;
+        let grafico2;
+        let grafico3;
+        let grafico4;
+        fetch('http://localhost:8080/practica4/getdata?data=1')
+            .then((resp) => resp.json())
+            .then(function(data) {
+                if(data.fecha !==null){
+                    fecha1 = data.fecha;
+                    humedad1 = data.humedad;
+                    temperatura1 = data.temperatura;
+                    drawChart(fecha1, humedad1, "grafico1","Dispositivo 1","Grafico Humedad vs Tiempo",'blue');
+                    drawChart(fecha1, temperatura1, "grafico2","Dispositivo 1","Grafico Temperatura vs Tiempo",'blue');
+                }else{
+                    drawChart(0, 0, "grafico1","Dispositivo 1","Grafico Humedad vs Tiempo",'blue');
+                    drawChart(0, 0, "grafico2","Dispositivo 1","Grafico Temperatura vs Tiempo",'blue');
+                }
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+        fetch('http://localhost:8080/practica4/getdata?data=2')
+            .then((resp) => resp.json())
+            .then(function(data) {
+                if(data.fecha !==null){
+                    fecha2 = data.fecha;
+                    humedad2 = data.humedad;
+                    temperatura2 = data.temperatura;
+                    drawChart(fecha2, humedad2, "grafico3","Dispositivo 2","Grafico Humedad vs Tiempo",'red');
+                    drawChart(fecha2, temperatura2, "grafico4","Dispositivo 2","Grafico Temperatura vs Tiempo (Dispositivo2)",'red');
+                }else{
+                    drawChart(0, 0, "grafico3","Dispositivo 2","Grafico Humedad vs Tiempo",'red');
+                    drawChart(0, 0, "grafico4","Dispositivo 2","Grafico Temperatura vs Tiempo",'red');
+                }
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+        var urlEndPoint = 'http://localhost:8080/suscribe';
+        var eventSource = new EventSource(urlEndPoint);
+        eventSource.addEventListener("Dispositivo 1", function (event) {
+            var dispositivo1 = JSON.parse(event.data);
+            fecha1.push(dispositivo1.fecha);
+            humedad1.push(dispositivo1.humedad);
+            temperatura1.push(dispositivo1.temperatura);
+
+            drawChart(fecha1, humedad1, "grafico1","Dispositivo 1","Grafico Humedad vs Tiempo",'blue');
+            drawChart(fecha1, temperatura1, "grafico2","Dispositivo 1","Grafico Temperatura vs Tiempo",'blue');
+        })
+
+        eventSource.addEventListener("Dispositivo 2", function (event) {
+            var dispositivo1 = JSON.parse(event.data);
+            fecha2.push(dispositivo1.fecha);
+            humedad2.push(dispositivo1.humedad);
+            temperatura2.push(dispositivo1.temperatura);
+
+            drawChart(fecha2, humedad2, "grafico3","Dispositivo 2","Grafico Humedad vs Tiempo",'red');
+            drawChart(fecha2, temperatura2, "grafico4","Dispositivo 2","Grafico Temperatura vs Tiempo",'red');
+        })
+        function drawChart(fecha, campo,elemento,dispositivo,titulo,color) {
+
+
+            var Canvas = document.getElementById(elemento);
+            Chart.defaults.font.size = 20;
+            const labels = fecha;
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: dispositivo,
+                    data: campo,
+                    fill: false,
+                    tension: 0.1,
+                    borderColor: color
+                }]
+            };
+            var chartOptions = {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 80,
+                        fontColor: 'black'
+                    }
+                }, plugins: {
+                    title: {
+                        display: true,
+                        text: titulo
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            };
+
+            if (elemento == "grafico1") {
+                if (grafico1) {
+                    grafico1.destroy();
+                }
+                grafico1 = new Chart(Canvas, {
+                    type: 'line',
+                    data: data,
+                    options: chartOptions
+                });
+            } else if(elemento == "grafico2") {
+                if (grafico2) {
+                    grafico2.destroy();
+                }
+                grafico2 = new Chart(Canvas, {
+                    type: 'line',
+                    data: data,
+                    options: chartOptions
+                });
+            }else if(elemento == "grafico3") {
+                if (grafico3) {
+                    grafico3.destroy();
+                }
+                grafico3 = new Chart(Canvas, {
+                    type: 'line',
+                    data: data,
+                    options: chartOptions
+                });
+            }else {
+                if (grafico4) {
+                    grafico4.destroy();
+                }
+                grafico4 = new Chart(Canvas, {
+                    type: 'line',
+                    data: data,
+                    options: chartOptions
+                });
+            }
+        }
+</script>
+</body>
+</html>
