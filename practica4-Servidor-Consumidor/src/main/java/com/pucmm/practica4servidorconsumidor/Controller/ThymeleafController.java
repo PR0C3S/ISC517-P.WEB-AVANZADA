@@ -34,7 +34,7 @@ public class ThymeleafController {
         Consumidor consumidor= new Consumidor(sensorRepository);
         consumidor.conectar();
         System.out.println("Consumidor conectado");
-        return "prueba";
+        return "Consumidor";
     }
 
     @GetMapping (path = "/getdata", produces = MediaType.APPLICATION_JSON_VALUE)

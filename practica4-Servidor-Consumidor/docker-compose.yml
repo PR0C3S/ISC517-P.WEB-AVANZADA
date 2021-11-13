@@ -2,8 +2,8 @@
 version: '3.8'
 #Bloque de servicios, indica los contenedores a utilizar.
 services:
-  app-web:       #nombre del servicio
-    #image: ${DK_USR}/practica3 #imagen utilizada si viene del registro.
+  app-web:     #  #nombre del servicio
+    #image: ${DK_USR}/practica4 #imagen utilizada si viene del registro.
     build: .
     ports:          #puertos que estaran expuestos.
       - ${PUERTO_APP}:8080
@@ -50,22 +50,21 @@ services:
     build:
       context: ../practica4_PUBLICADOR
       dockerfile: Dockerfile
-
-    depends_on:
-      - app-web
     networks:
       - red-app
-    command bash -c "cd/app" && javar -jar practica4-publicador.jar 1"
+    depends_on:
+      - app-web
+    command: bash -c "cd /app" && java -jar practica4-publicador.jar 1"
 
   sensor2:
     build:
-      context: Cliente/
+      context: ../practica4_PUBLICADOR
       dockerfile: Dockerfile
-    depends_on:
-      - app-web
     networks:
       - red-app
-    command bash -c "cd/app" && javar -jar practica4-publicador.jar 2"
+    depends_on:
+      - app-web
+    command: bash -c "cd /app" && java -jar practica4-publicador.jar 2"
 
 networks:  #bloque para las redes
   red-app:   #indicando la red definida
