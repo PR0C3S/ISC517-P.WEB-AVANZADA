@@ -8,4 +8,4 @@ FROM openjdk:11.0.12-jre-slim-buster
 EXPOSE 8080
 RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/practica4-publicador.jar
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/practica4-publicador.jar"]
+ENTRYPOINT ["java","-jar","/app/practica4-publicador.jar"]

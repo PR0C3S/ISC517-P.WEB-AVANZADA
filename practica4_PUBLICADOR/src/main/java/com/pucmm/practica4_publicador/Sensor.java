@@ -7,11 +7,11 @@ public class Sensor  {
     private int humedad;
 
     private String fechaGeneracion;
-    public Sensor(String idDispositivo){
+    public Sensor(int idDispositivo){
         this.temperatura = (int) (Math.random() * 100) + 1;
         this.humedad = (int) (Math.random() * 100) + 1;
         this.fechaGeneracion = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
-        this.idDispositivo = Integer.parseInt(idDispositivo);
+        this.idDispositivo = idDispositivo;
     }
 
 }

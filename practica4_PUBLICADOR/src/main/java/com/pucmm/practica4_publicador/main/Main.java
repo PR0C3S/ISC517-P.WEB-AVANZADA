@@ -24,47 +24,25 @@ public class Main {
         }
 
         int opcion = Integer.parseInt(args[0]);
-        if(opcion == 1){
-            Productor publicadorA = new Productor();
-            Thread hiloA = new Thread(new Runnable() {
+        if(opcion == 1 || opcion == 2){
+            Productor publicador = new Productor();
+            Thread hilo = new Thread(new Runnable() {
                 public void run() {
                     while(true) {
                         Gson gson = new Gson();
                         try {
-                            publicadorA.enviarMensaje(gson.toJson(new Sensor("1")));
+                            publicador.enviarMensaje(gson.toJson(new Sensor(opcion)));
                             System.out.println("Mensaje enviado");
+                            System.out.println("Presiona Enter para salir del programa:");
                             Thread.sleep(60000);
                         } catch (JMSException | InterruptedException e) {
-                            System.out.println("Error con el hilo del sensor 1: "+e.getMessage());
+                            System.out.println("Error con el hilo del sensor"+opcion+": "+e.getMessage());
                             e.printStackTrace();
                         }
                     }
                 }
             });
-            hiloA.start();
-            System.out.println("Presiona Enter para salir del programa:");
-            Scanner s = new Scanner(System.in);
-            String dato = s.nextLine();
-            System.exit(0);
-        } else if(opcion == 2){
-            Productor publicadorB = new Productor();
-            Thread hiloB = new Thread(new Runnable() {
-                public void run() {
-                    while(true) {
-                        Gson gson = new Gson();
-                        try {
-                            publicadorB.enviarMensaje(gson.toJson(new Sensor("2")));
-                            System.out.println("Mensaje enviado");
-                            Thread.sleep(60000);
-                        } catch (JMSException | InterruptedException e) {
-                            System.out.println("Error con el hilo del sensor 2" +
-                                    ": "+e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            hiloB.start();
+            hilo.start();
             System.out.println("Presiona Enter para salir del programa:");
             Scanner s = new Scanner(System.in);
             String dato = s.nextLine();

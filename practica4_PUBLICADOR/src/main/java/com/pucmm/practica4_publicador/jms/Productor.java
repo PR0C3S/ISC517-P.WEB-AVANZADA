@@ -30,8 +30,7 @@ public class Productor {
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         // Creamos o nos connectamos a la una cola, por defecto ActiveMQ permite
-        // la creación si no existe. Si la cola es del tipo Queue es acumula los mensajes, si es
-        // del tipo topic es en el momento.
+        // la creación si no existe. La cola es del tipo topic es acumula los mensajes es en el momento.
         MessageProducer producer =  null;
         Topic topic = session.createTopic("notificacion_sensores");
         producer = session.createProducer(topic);
