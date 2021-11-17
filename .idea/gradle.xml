@@ -33,6 +33,51 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practica4" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/practica4" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practica4-Publicador" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/practica4-Publicador" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practica4-Servidor-Consumidor" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/practica4-Servidor-Consumidor" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practica4_PUBLICADOR" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/practica4_PUBLICADOR" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/practica4a" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/practica4a" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
