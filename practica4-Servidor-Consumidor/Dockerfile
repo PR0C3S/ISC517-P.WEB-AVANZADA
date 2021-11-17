@@ -27,7 +27,5 @@ VOLUME /tmp
 EXPOSE 8080
 # Copiando el archivo jar generado luego de la ejecución del comando
 # gradle task bootjar, se crean el jar y se copia a la imagen.
-COPY --from=build /home/gradle/src/build/libs/*.jar consumidor.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/consumidor.jar
 
-#Comando que se ejecuta una vez es iniciada la aplicación.
-ENTRYPOINT ["java", "-jar", "consumidor.jar"]

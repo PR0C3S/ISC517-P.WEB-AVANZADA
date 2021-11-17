@@ -20,6 +20,7 @@ public class Main {
 
         if(args.length == 0){
             mensajesParametros();
+            System.out.println("No se recibieron parametros, finalizando la app...");
             return;
         }
 
@@ -36,17 +37,13 @@ public class Main {
                             System.out.println("Presiona Enter para salir del programa:");
                             Thread.sleep(60000);
                         } catch (JMSException | InterruptedException e) {
-                            System.out.println("Error con el hilo del sensor"+opcion+": "+e.getMessage());
-                            e.printStackTrace();
+                            System.out.println(e.getMessage());
                         }
                     }
                 }
             });
             hilo.start();
-            System.out.println("Presiona Enter para salir del programa:");
-            Scanner s = new Scanner(System.in);
-            String dato = s.nextLine();
-            System.exit(0);
+           while(true){}
         }
         else{
             mensajesParametros();

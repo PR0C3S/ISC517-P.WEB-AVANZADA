@@ -7,7 +7,9 @@ plugins {
 group = 'com.pucmm'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-
+springBoot {
+    mainClassName = 'com.pucmm.practica4servidorconsumidor.Practica4ServidorConsumidorApplication'
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
