@@ -13,7 +13,6 @@ public class Practica4ServidorConsumidorApplication implements CommandLineRunner
     @Autowired
     private Environment environment;
     public static void main(String[] args) throws InterruptedException{
-        Thread.sleep(5000);
         ApplicationContext applicationContext = SpringApplication.run(Practica4ServidorConsumidorApplication.class, args);
         System.out.println("Inicializando Servidor JMS");
         try {

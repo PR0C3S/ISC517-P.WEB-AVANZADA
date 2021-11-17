@@ -6,6 +6,7 @@ services:
     #image: ${DK_USR}/practica4 #imagen utilizada si viene del registro.
     build: .
     ports:          #puertos que estaran expuestos.
+      - "61616:61616"
       - ${PUERTO_APP}:8080
     env_file:
       - .env
@@ -17,6 +18,7 @@ services:
       - mi-volumen-compose:/tmp/
     depends_on:   #indica que primero debe subir los servicios indicados.
       - base-datos-app-web
+    command: bash -c "cd /app && java -jar consumidor.jar"
 
   base-datos-app-web:
     image: mysql:5.7.26
@@ -50,21 +52,25 @@ services:
     build:
       context: ../practica4_PUBLICADOR
       dockerfile: Dockerfile
+    ports: #puertos que estaran expuestos.
+        - "8083:8080"
     networks:
       - red-app
     depends_on:
       - app-web
-    command: bash -c "cd /app" && java -jar practica4-publicador.jar 1"
+    command: bash -c "sleep 60 && cd /app && java -jar practica4-publicador.jar 1"
 
   sensor2:
     build:
       context: ../practica4_PUBLICADOR
       dockerfile: Dockerfile
+    ports: #puertos que estaran expuestos.
+      - "8084:8080"
     networks:
       - red-app
     depends_on:
       - app-web
-    command: bash -c "cd /app" && java -jar practica4-publicador.jar 2"
+    command: bash -c "sleep 60 && cd /app && java -jar practica4-publicador.jar 2"
 
 networks:  #bloque para las redes
   red-app:   #indicando la red definida
