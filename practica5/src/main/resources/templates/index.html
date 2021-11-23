@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Proyecto de HA utilizando Spring Boot</title>
+</head>
+<body>
+<h1 >Prueba de Alta Disponibilidad (HA) con Spring boot y Hazelcast</h1>
+<a href="/admin/">Ir a la pagina controlada</a>
+<hr>
+<h3 th:text="'La cantidad de visualizaciones:'+ ${contador}">Contador....</h3>
+<p>
+    Puerto de la aplicación local <span th:text="${puerto}">XXXXX</span>
+</p>
+</body>
+</html>
