@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title th:text="${titulo}">Titulo por Defecto</title>
+</head>
+<body>
+<div th:replace="fragments/Header :: header"> </div>
+
+<div class="container text-center mt-5" >
+    <h1 th:text="${titulo}">Titulo Enviado</h1>
+    <div class="col-md-1">
+        <form method="get" action="/practica5/mock/new">
+            <input type="submit"  th:value="${bt1}" class="btn btn-primary" />
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col" >ID</th>
+                    <th scope="col" th:if="${admin}" th:text="${t0}"></th>
+                    <th scope="col" th:text="${t6}" >t6</th>
+                    <th scope="col" th:text="${t1}" >t1</th>
+                    <th scope="col" th:text="${t2}">t2</th>
+                    <th scope="col" th:text="${t3}">t3</th>
+                    <th scope="col" th:text="${t4}">t4 </th>
+                    <th scope="col" th:text="${t5}">t5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div th:if="${listaMock != null}">
+                    <tr th:each="actual: ${listaMock}">
+                        <td th:text="${actual.id}" ></td>
+                        <td th:if="${admin}" th:text="${actual.proyecto.usuario.username}" ></td>
+                        <td th:text="${actual.RUTA}"></td>
+                        <td th:text="${actual.name}"></td>
+                        <td>
+                            <span th:if="${actual.accessMethod} == 'POST'" class="badge bg-primary text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span th:if="${actual.accessMethod} == 'GET'" class="badge bg-secondary text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span th:if="${actual.accessMethod} == 'PUT'" class="badge bg-success text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span th:if="${actual.accessMethod} == 'DELETE'" class="badge bg-warning text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span th:if="${actual.accessMethod} == 'PATCH'" class="badge bg-info text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span th:if="${actual.accessMethod} == 'OPTIONS'" class="badge bg-dark text-white" th:text="${actual.accessMethod}">Optional</span>
+                            <span class="badge bg-info text-dark" th:text="${actual.httpStatus}">Optional</span>
+                            <span class="badge bg-warning text-dark" th:text="${actual.responseContentType}">Optional</span>
+                        </td>
+
+                        <td th:text="${actual.fechaVencimiento()}"></td>
+                        <td th:text="${actual.timeDelay}"></td>
+                        <td>
+                            <form th:if="${actual.accessMethod} == 'POST'"  th:action=" @{/jwt/auth/{id}(id = ${actual.id})}" th:method="post">
+                                <input  type="submit"  class="btn btn-primary" th:value="${bt5}">
+                            </form>
+                            <form th:if="${actual.accessMethod} == 'GET'"  th:action=" @{/jwt/auth/{id}(id = ${actual.id})}" th:method="get">
+                                <input  type="submit"  class="btn btn-secondary" th:value="${bt5}">
+                            </form>
+                            <form  th:action=" @{/practica5/eliminar/mock/{id}(id = ${actual.id})}" th:method="post">
+                                <input type="submit" class="btn btn-danger" th:value="${bt6}">
+                            </form>
+                        </td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
