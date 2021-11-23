@@ -8,6 +8,10 @@ group = 'com.pucmm'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+wrapper {
+    gradleVersion = '7.2'
+    distributionUrl = distributionUrl.replace("bin", "all")
+}
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
