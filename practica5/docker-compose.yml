@@ -58,7 +58,7 @@ services:
       - "443:443"
     depends_on:
       - app3
-    
+
 
   base-datos-app-web:
     image: mysql:5.7.26
