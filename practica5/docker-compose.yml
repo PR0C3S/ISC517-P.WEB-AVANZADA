@@ -51,6 +51,15 @@ services:
       - base-datos-app-web
     command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8082"
 
+  haproxy:
+    build: ./haproxy/
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - app3
+
+
   base-datos-app-web:
     image: mysql:5.7.26
     ports:
