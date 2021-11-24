@@ -58,7 +58,7 @@ services:
       - "443:443"
     depends_on:
       - app3
-    
+
 
   base-datos-app-web:
     image: mysql:5.7.26
@@ -74,6 +74,19 @@ services:
       - ~/dato_mysql_compose:/var/lib/mysql
     networks:
       - red-app
+
+  phpmyadmin: # Cliente phpmyadmin para
+    image: phpmyadmin:5.1.1
+    env_file:
+      - .env
+    ports:
+      - ${PUERTO_PHPMYADMIN}:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - red-app
+    depends_on: #indica que primero debe subir los servicios indicados.
+      - base-datos-app-web
 
 networks:  #bloque para las redes
   red-app:   #indicando la red definida
