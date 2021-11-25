@@ -52,13 +52,14 @@ services:
     command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8082"
 
   haproxy:
-    build: ./haproxy/
+    build: ./haproxy
     ports:
       - "80:80"
       - "443:443"
     depends_on:
+      - app1
+      - app2
       - app3
-
 
   base-datos-app-web:
     image: mysql:5.7.26
