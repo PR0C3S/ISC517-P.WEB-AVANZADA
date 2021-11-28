@@ -1,11 +1,15 @@
 package com.pucmm.practica5;
 
+import com.hazelcast.config.Config;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 import com.pucmm.practica5.services.seguridad.SeguridadServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
@@ -21,6 +25,13 @@ public class Practica5Application implements CommandLineRunner {
 
         SeguridadServices seguridadServices = (SeguridadServices) applicationContext.getBean("seguridadServices");
         seguridadServices.createAdminUser();
+
+
+    }
+
+    @Bean
+    public HazelcastInstance hazelcastInstance() {//Configuración basica.
+        return Hazelcast.newHazelcastInstance();
     }
 
     @Override
@@ -30,5 +41,6 @@ public class Practica5Application implements CommandLineRunner {
         String direccionDb = environment.getProperty("DB_HOST");
         System.out.println("Nombre de la Aplicación = "+db_nombre);
         System.out.println("Dirección de la Aplicación = "+direccionDb);
+
     }
 }
