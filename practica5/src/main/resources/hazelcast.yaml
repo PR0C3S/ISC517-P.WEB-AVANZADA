@@ -1,6 +1,0 @@
-# hazelcast.yaml
-hazelcast:
-    join:
-      multicast:
-        enabled: true
-        multicast-group: 127.0.0.1
