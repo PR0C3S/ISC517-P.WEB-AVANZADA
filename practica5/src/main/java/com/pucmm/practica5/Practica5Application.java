@@ -1,6 +1,7 @@
 package com.pucmm.practica5;
 
 import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.pucmm.practica5.services.seguridad.SeguridadServices;
@@ -11,18 +12,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.Locale;
 
 @SpringBootApplication
+@EnableHazelcastHttpSession
+
 public class Practica5Application implements CommandLineRunner {
     @Autowired
     private Environment environment;
 
 
     public static void main(String[] args) throws InterruptedException{
-
-        Thread.sleep(5000);
         ApplicationContext applicationContext = SpringApplication.run(Practica5Application.class, args);
-
         SeguridadServices seguridadServices = (SeguridadServices) applicationContext.getBean("seguridadServices");
         seguridadServices.createAdminUser();
     }
@@ -35,5 +44,23 @@ public class Practica5Application implements CommandLineRunner {
         System.out.println("Nombre de la Aplicación = "+db_nombre);
         System.out.println("Dirección de la Aplicación = "+direccionDb);
 
+    }
+
+    @Bean
+    public Config config(){
+        Config config = new Config();
+        JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+        joinConfig.getMulticastConfig().setEnabled(false);
+        joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
+
+        return config;
+    }
+
+    @Controller
+    public class InicialController{
+        @GetMapping(path ="/")
+        public String getListaUsuarios(Model model, Locale locale, HttpSession sesion, HttpServletRequest request){
+            return "redirect:/practica5/listarMock";
+        }
     }
 }

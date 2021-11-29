@@ -6,6 +6,7 @@ import com.pucmm.practica5.entities.seguridad.Usuario;
 import com.pucmm.practica5.repositorios.ProyectoRepository;
 import com.pucmm.practica5.repositorios.seguridad.RolRepository;
 import com.pucmm.practica5.repositorios.seguridad.UsuarioRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -67,6 +68,10 @@ public class SeguridadServices implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario user = usuarioRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User or password incorrect");
+        }
 
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
         for (Rol role : user.getRoles()) {
