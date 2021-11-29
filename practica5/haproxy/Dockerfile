@@ -1,8 +1,8 @@
 FROM alpine AS certmaker
-ENV DOMAIN=jxpsolution.me
+ENV DOMAIN=dietaketo.me
 COPY /*.pem /temp/
 RUN cat /temp/fullchain.pem  /temp/privkey.pem > /temp/$DOMAIN.pem
-RUN cat /temp/jxpsolution.me.pem
+RUN cat /temp/dietaketo.me.pem
 
 
 FROM haproxy:2.4.8-alpine
