@@ -18,6 +18,7 @@ services:
     depends_on: #indica que primero debe subir los servicios indicados.
       - base-datos-app-web
     command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8080"
+    container_name: 'app1'  # Name of the container
   app2: #  #nombre del servicio
     #image: ${DK_USR}/practica4 #imagen utilizada si viene del registro.
     build: .
@@ -35,6 +36,7 @@ services:
       - base-datos-app-web
       - app1
     command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8081"
+    container_name: 'app2'  # Name of the container
   app3: #  #nombre del servicio
     #image: ${DK_USR}/practica4 #imagen utilizada si viene del registro.
     build: .
@@ -52,13 +54,18 @@ services:
       - base-datos-app-web
       - app2
     command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8082"
+    container_name: 'app3'  # Name of the container
 
   haproxy:
     build: ./haproxy
     ports:
       - "80:80"
       - "443:443"
+    networks: #red para conectar los equipos.
+      - red-app
     depends_on:
+      - app1
+      - app2
       - app3
   base-datos-app-web:
     image: mysql:5.7.26

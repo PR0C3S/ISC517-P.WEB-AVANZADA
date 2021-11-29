@@ -25,13 +25,6 @@ public class Practica5Application implements CommandLineRunner {
 
         SeguridadServices seguridadServices = (SeguridadServices) applicationContext.getBean("seguridadServices");
         seguridadServices.createAdminUser();
-
-
-    }
-
-    @Bean
-    public HazelcastInstance hazelcastInstance() {//Configuración basica.
-        return Hazelcast.newHazelcastInstance();
     }
 
     @Override
