@@ -1,9 +1,5 @@
 # hazelcast.yaml
 hazelcast:
-  network:
-    port:
-      auto-increment: true
-      port: 8080
     join:
       multicast:
         enabled: true
