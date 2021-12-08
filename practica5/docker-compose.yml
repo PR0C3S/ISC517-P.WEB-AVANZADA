@@ -59,7 +59,7 @@ services:
   haproxy:
     build: ./haproxy
     ports:
-      - "80:80"
+      - "8080:8080"
       - "443:443"
     networks: #red para conectar los equipos.
       - red-app
