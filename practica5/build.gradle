@@ -34,14 +34,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.1'
 
     //módulo para trabajar con hazecast.
-    implementation 'com.hazelcast:hazelcast'
-    //módulo para trabajar con Spring session.
-    compileOnly('org.springframework.session:spring-session-core')
-    //módulo para trabajar con Hazelcast.
-    compileOnly('org.springframework.session:spring-session-hazelcast')
-
-
-
+    implementation 'com.hazelcast:hazelcast:4.2'
     implementation'org.springframework.boot:spring-boot-starter-tomcat'
 
     ///Libreria lombok

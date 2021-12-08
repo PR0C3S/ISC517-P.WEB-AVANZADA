@@ -10,20 +10,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
 import java.util.Locale;
 
 @SpringBootApplication
-@EnableHazelcastHttpSession
+
 
 public class Practica5Application implements CommandLineRunner {
     @Autowired
@@ -46,15 +43,7 @@ public class Practica5Application implements CommandLineRunner {
 
     }
 
-    @Bean
-    public Config config(){
-        Config config = new Config();
-        JoinConfig joinConfig = config.getNetworkConfig().getJoin();
-        joinConfig.getMulticastConfig().setEnabled(false);
-        joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
 
-        return config;
-    }
 
     @Controller
     public class InicialController{
