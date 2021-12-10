@@ -17,7 +17,7 @@ services:
       - mi-volumen-compose:/tmp/
     depends_on: #indica que primero debe subir los servicios indicados.
       - base-datos-app-web
-    command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8080"
+    command: bash -c "cd /app && java -Djava.security.egd=file:/dev/./urandom -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8080"
     container_name: 'app1'  # Name of the container
   app2: #  #nombre del servicio
     #image: ${DK_USR}/practica4 #imagen utilizada si viene del registro.
@@ -35,7 +35,7 @@ services:
     depends_on: #indica que primero debe subir los servicios indicados.
       - base-datos-app-web
       - app1
-    command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8081"
+    command: bash -c "cd /app && java -Djava.security.egd=file:/dev/./urandom -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8081"
     container_name: 'app2'  # Name of the container
   app3: #  #nombre del servicio
     #image: ${DK_USR}/practica4 #imagen utilizada si viene del registro.
@@ -53,7 +53,7 @@ services:
     depends_on: #indica que primero debe subir los servicios indicados.
       - base-datos-app-web
       - app2
-    command: bash -c "cd /app && java -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8082"
+    command: bash -c "cd /app && java -Djava.security.egd=file:/dev/./urandom -jar practica5-0.0.1-SNAPSHOT.jar --server.port=8082"
     container_name: 'app3'  # Name of the container
 
   haproxy:
@@ -85,6 +85,7 @@ services:
 
 networks:  #bloque para las redes
   red-app:   #indicando la red definida
+    driver: bridge
 
 volumes: #Bloque para definir los volumenes
   mi-volumen-compose:
