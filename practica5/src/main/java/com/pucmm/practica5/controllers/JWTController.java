@@ -42,7 +42,7 @@ public class JWTController {
     @RequestMapping(path ="/auth/{id}", method = RequestMethod.GET)
     public void getAuth(@PathVariable("id") long id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
         String token = "";
-        Mock mock = mockRepository.getById(id);
+        Mock mock = mockRepository.consultaMock(id);
         token = generarToken(mock);
         System.out.println("TOKEN CREADO CORRECTAMENTE");
         System.out.println("TOKEN: "+token);
@@ -80,7 +80,7 @@ public class JWTController {
     @RequestMapping(path ="/auth/{id}", method = RequestMethod.POST)
     public void postAuth(@PathVariable("id") long id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
         String token = "";
-        Mock mock = mockRepository.getById(id);
+        Mock mock = mockRepository.consultaMock(id);
         token = generarToken(mock);
         System.out.println("TOKEN CREADO CORRECTAMENTE");
         System.out.println("TOKEN: "+token);
@@ -213,7 +213,7 @@ public class JWTController {
     //autentication para postman
     @PostMapping("/authenticate/{id}")
     public ResponseEntity<?> authenticateForPostman(@PathVariable("id") long id) throws Exception{
-        Mock mock = mockRepository.getById(id);
+        Mock mock = mockRepository.consultaMock(id);
         String token = generarToken(mock);
         System.out.println("TOKEN CREADO CORRECTAMENTE");
         String body = "{\"SecretKey\": \""+token+"\", \"MethodAc\": \""+mock.getAccessMethod()+"\", \"Ruta\": \""+mock.getRUTA()+"\"}";

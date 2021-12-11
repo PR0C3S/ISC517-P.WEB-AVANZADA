@@ -1,9 +1,6 @@
 package com.pucmm.practica5;
 
-import com.hazelcast.config.Config;
-import com.hazelcast.config.JoinConfig;
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
+
 import com.pucmm.practica5.services.seguridad.SeguridadServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +12,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
@@ -42,11 +38,6 @@ public class Practica5Application implements CommandLineRunner {
         System.out.println("Nombre de la Aplicación = "+db_nombre);
         System.out.println("Dirección de la Aplicación = "+direccionDb);
 
-    }
-
-    @Bean
-    public HazelcastInstance hazelcastInstance() {//Configuración basica.
-        return Hazelcast.newHazelcastInstance();
     }
 
     @Controller

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.8-SNAPSHOT'
+    id 'org.springframework.boot' version '2.5.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -8,6 +8,15 @@ group = 'com.pucmm'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
 wrapper {
     gradleVersion = '7.2'
     distributionUrl = distributionUrl.replace("bin", "all")
@@ -19,23 +28,29 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'de.codecentric:spring-boot-admin-starter-client:2.2.2'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'junit:junit:4.13.1'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'de.codecentric:spring-boot-admin-starter-client:2.2.2'
 
+    //modulo actuactor
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //modulo de gson
     implementation 'com.google.code.gson:gson:2.8.1'
 
-    //módulo para trabajar con hazecast.
-    implementation 'com.hazelcast:hazelcast:4.2'
-    implementation'org.springframework.boot:spring-boot-starter-tomcat'
+    //modulo spring security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    //módulo para trabajar con redis.
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.session:spring-session-data-redis'
 
     ///Libreria lombok
     compileOnly 'org.projectlombok:lombok'
@@ -43,7 +58,6 @@ dependencies {
 
     //Base de datos
     runtimeOnly 'mysql:mysql-connector-java'
-    runtimeOnly 'com.h2database:h2'
 
     //Libreria para JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.10.5'
